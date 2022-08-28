@@ -5,7 +5,7 @@ import Test1Wrapper from "./Test1.wrapper";
 const Test1Container = () => {
   const [quarterList, setQuarterList] = useState<QuarterDropDownValue[]>([])
   const [selectedQuarter, setSelectedQuarter] = useState<QuarterDropDownValue | null>(null)
-  const startDate = '2021-4-23';
+  const startDate= new Date(2018,4,23)
   const todayDate = new Date();
 
   const extractQuarter = (monthValue: number) => {
@@ -25,13 +25,13 @@ const Test1Container = () => {
     return quarterValue
   }
 
-  const getQuarterList = (startDate: string, endDate: Date) => {
+  const getQuarterList = (startDate: Date, endDate: Date) => {
     const listValue: QuarterDropDownValue[] = [];
     const endDateArray: number[] = [endDate.getFullYear(), endDate.getMonth(), endDate.getDate()]
-    const startDateArray = startDate.split("-");
-    const startYear: number = parseInt(startDateArray[0]);
+    const startDateArray: number[] = [startDate.getFullYear(), startDate.getMonth(), startDate.getDate()]
+    const startYear: number = startDateArray[0];
     const endYear: number = endDateArray[0];
-    const startQuarterValue: number = extractQuarter(parseInt(startDateArray[1]));
+    const startQuarterValue: number = extractQuarter(startDateArray[1]);
     const endQuakerValue: number = extractQuarter(endDateArray[1]);
     console.log(startQuarterValue, endQuakerValue);
     for (let i = startYear; i <= endYear; i++) {
@@ -67,7 +67,6 @@ const Test1Container = () => {
   }
 
   const handleQuarterChange = (event: SelectChangeEvent) => {
-    alert(event.target.value);
     setSelectedQuarter({
       label: event.target.value,
       value: event.target.value
